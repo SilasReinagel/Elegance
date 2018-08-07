@@ -6,7 +6,7 @@ namespace Elegance
     [DebuggerDisplay("{Description}: {Count}")]
     public struct NullCount : IAnalysisCounter
     {
-        public string Description => GetType().Name;
+        public string Description => CountType.NullCount.ToString();
         public int Count { get; }
 
         private NullCount(int count) => Count = count;

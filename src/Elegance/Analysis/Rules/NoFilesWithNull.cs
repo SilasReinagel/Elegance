@@ -19,7 +19,7 @@ namespace Elegance
         }
 
         public IAnalysisRule Apply(FileAnalysisResult file)
-            => file.Value[nameof(NullCount)] > 0
+            => file.Value[CountType.NullCount.ToString()] > 0
                 ? new NoFilesWithNull(Count + 1, Violators.Concat(file.FileName))
                 : this;
     }

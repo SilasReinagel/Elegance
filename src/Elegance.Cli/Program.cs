@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Elegance.Analysis;
 using Elegance._Common;
 
 namespace Elegance.Cli
