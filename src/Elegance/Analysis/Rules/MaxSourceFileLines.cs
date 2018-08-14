@@ -23,7 +23,7 @@ namespace Elegance
         
         public IAnalysisRule Apply(FileAnalysisResult file)
         {
-            return file.Value[nameof(SrcLinesCount)] > _maxLines 
+            return file.Value[CountType.SourceLines.ToString()] > _maxLines 
                 ? new MaxSourceFileLines(_maxLines, Count + 1, Violators.Concat(file.FileName))
                 : this;
         }

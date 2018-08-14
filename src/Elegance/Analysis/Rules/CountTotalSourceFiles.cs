@@ -8,14 +8,9 @@ namespace Elegance
         public int Count { get; }
         public IEnumerable<string> Violators => new List<string>();
         
-        private CountTotalSourceFiles(int count)
-        {
-            Count = count;
-        }
+        private CountTotalSourceFiles(int count) => Count = count;
         
         public IAnalysisRule Apply(FileAnalysisResult file)
-        {
-            return new CountTotalSourceFiles(Count + 1);
-        }
+            => new CountTotalSourceFiles(Count + 1);
     }
 }

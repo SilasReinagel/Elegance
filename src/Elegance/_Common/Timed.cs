@@ -21,4 +21,25 @@ namespace Elegance._Common
             output.Put($"{_name} - {duration.TotalMilliseconds}ms");
         }
     }
+    
+    public class Timed<T>
+    {
+        private readonly string _name;
+        private readonly Func<T> _getResult;
+
+        public Timed(string name, Func<T> getResult)
+        {
+            _name = name;
+            _getResult = getResult;
+        }
+        
+        public T OutputTo(IConsumer<string> output)
+        {            
+            var start = DateTime.Now;
+            var result = _getResult();
+            var duration = DateTime.Now - start;
+            output.Put($"{_name} - {duration.TotalMilliseconds}ms");
+            return result;
+        }
+    }
 }

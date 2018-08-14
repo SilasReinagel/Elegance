@@ -1,17 +1,19 @@
 ﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace Elegance
+namespace Elegance.Analysis
 {
     [DebuggerDisplay("{Description}: {Count}")]
-    public struct NullCount : IAnalysisCounter
+    public struct NullCount : ISyntaxNodeCounter
     {
-        public string Description => CountType.NullCount.ToString();
+        public string Description => CountType.Null.ToString();
         public int Count { get; }
 
         private NullCount(int count) => Count = count;
-        
-        public IAnalysisCounter Apply(string srcLine) 
-            => new NullCount(Count + Regex.Matches(srcLine, "[^\"']null[^\"']").Count);
+
+        public ISyntaxNodeCounter Apply(SyntaxNode node)
+            => new NullCount(Count 
+                + (node.Kind().Equals(SyntaxKind.NullLiteralExpression) || node.Kind().Equals(SyntaxKind.NullKeyword) ? 1 : 0));
     }
 }

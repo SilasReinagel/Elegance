@@ -1,6 +1,6 @@
 ﻿namespace Elegance
 {
-    public interface IFileAnalyzer
+    public interface IAnalyzedFile
     {
         FileAnalysisResult Get();
     }

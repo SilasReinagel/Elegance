@@ -2,9 +2,10 @@
 {
     public enum CountType
     {
-        NullCount,
-        ThisCount,
-        StaticClassCount,
-        ClassCount
+        Null,
+        This,
+        StaticNonExtensionClass,
+        Class,
+        SourceLines
     }
 }

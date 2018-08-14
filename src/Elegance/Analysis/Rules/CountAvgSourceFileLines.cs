@@ -18,6 +18,6 @@ namespace Elegance
         }
 
         public IAnalysisRule Apply(FileAnalysisResult file)
-            => new CountAvgSourceFileLines(_totalLines + file.Value[nameof(SrcLinesCount)], _numFiles + 1);
+            => new CountAvgSourceFileLines(_totalLines + file.Value[CountType.SourceLines.ToString()], _numFiles + 1);
     }
 }

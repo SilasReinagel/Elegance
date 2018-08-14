@@ -4,7 +4,7 @@ using Elegance.Analysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Elegance.Engine
+namespace Elegance
 {
     public sealed class RoslynTreeWalker : CSharpSyntaxWalker
     {

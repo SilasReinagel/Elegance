@@ -19,7 +19,7 @@ namespace Elegance
         }
 
         public IAnalysisRule Apply(FileAnalysisResult file)
-            => file.Value[nameof(ThisCount)] > 0
+            => file.Value[CountType.This.ToString()] > 0
                 ? new NoFilesWithThis(Count + 1, Violators.Concat(file.FileName))
                 : this;
     }
