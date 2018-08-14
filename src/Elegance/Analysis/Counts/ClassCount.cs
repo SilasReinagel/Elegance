@@ -1,17 +1,18 @@
 ﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace Elegance
+namespace Elegance.Analysis
 {
     [DebuggerDisplay("{Description}: {Count}")]
-    public struct ClassCount : IAnalysisCounter
+    public struct ClassCount : ISyntaxNodeCounter
     {
-        public string Description => GetType().Name;
+        public string Description => CountType.Class.ToString();
         public int Count { get; }
 
         private ClassCount(int count) => Count = count;
-        
-        public IAnalysisCounter Apply(string srcLine) 
-            => new ClassCount(Count + Regex.Matches(srcLine, " class ").Count);
+
+        public ISyntaxNodeCounter Apply(SyntaxNode node)
+            => new ClassCount(Count + (node.Kind().Equals(SyntaxKind.ClassDeclaration) ? 1 : 0));
     }
 }

@@ -1,17 +1,18 @@
 ﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace Elegance
+namespace Elegance.Analysis
 {
     [DebuggerDisplay("{Description}: {Count}")]
-    public struct ThisCount : IAnalysisCounter
+    public struct ThisCount : ISyntaxNodeCounter
     {
-        public string Description => GetType().Name;
+        public string Description => CountType.This.ToString();
         public int Count { get; }
 
         private ThisCount(int count) => Count = count;
-        
-        public IAnalysisCounter Apply(string srcLine) 
-            => new ThisCount(Count + Regex.Matches(srcLine, @"this\.").Count);
+
+        public ISyntaxNodeCounter Apply(SyntaxNode node)
+            => new ThisCount(Count + (node.Kind().Equals(SyntaxKind.ThisExpression) ? 1 : 0));
     }
 }
